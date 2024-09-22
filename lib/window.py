@@ -22,11 +22,11 @@ def WindowLoop():
             t = pygame.time.get_ticks()
             DELTATIME = (t - debug.TICKSINCELASTFRAME) / 1000.0
             debug.TICKSINCELASTFRAME = t
-        WIN_CLOCK.tick(75)
+        WIN_CLOCK.tick(60)
         GAME_WIN.fill((0,0,0))
 
+        level.RenderLevel()
         debug.Tick_Debug()
-        level.RenderLevel(DELTATIME)
         pygame.display.flip()
 
         input.ProcessInput(pygame.key.get_pressed(), DELTATIME)
@@ -35,6 +35,9 @@ def WindowLoop():
             renderer.ROTATIONY = 0
 
         for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_PERIOD:
+                    debug.DEBUG_ENABLED = not debug.DEBUG_ENABLED
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()

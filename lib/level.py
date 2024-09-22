@@ -1,4 +1,5 @@
 from lib.renderer import *
+from lib import debug
 
 POINTS = [
     Point3D(-1.0, -1.0, -1.0), Point3D(-1.0, -1.0, 1.0),
@@ -14,6 +15,14 @@ VERTICES = [
     Vertex(5, 1), Vertex(4, 1), Vertex(2, 6),
 ]
 
-def RenderLevel(dt):
-    global POINTS, VERTICES
-    Render(dt, POINTS, VERTICES)
+FACES = [
+    Face(0, 3, 6, 2, (225, 0, 0)), Face(2, 6, 7, 5, (225, 0, 0)),
+    Face(3, 6, 7, 4, (175, 0, 0))
+]
+
+def RenderLevel():
+    global POINTS, VERTICES, FACES
+    UpdateSize()
+    RenderFaces(POINTS, FACES)
+    if debug.DEBUG_ENABLED:
+        RenderWireFrame(POINTS, VERTICES)
