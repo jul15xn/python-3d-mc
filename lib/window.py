@@ -23,7 +23,7 @@ def WindowLoop():
             DELTATIME = (t - debug.TICKSINCELASTFRAME) / 1000.0
             debug.TICKSINCELASTFRAME = t
         WIN_CLOCK.tick(60)
-        GAME_WIN.fill((0,0,0))
+        GAME_WIN.fill((135, 206, 235))
 
         level.RenderLevel()
         debug.Tick_Debug()
