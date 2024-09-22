@@ -3,6 +3,7 @@ import moderngl as mgl
 import sys
 from model import *
 from camera import Camera
+from debug import Debug_Renderer
 
 class GraphicsEngine:
     def __init__(self, win_size=(1600, 900)):
@@ -13,9 +14,13 @@ class GraphicsEngine:
         pg.display.gl_set_attribute(pg.GL_CONTEXT_MINOR_VERSION, 3)
         pg.display.gl_set_attribute(pg.GL_CONTEXT_PROFILE_MASK, pg.GL_CONTEXT_PROFILE_CORE)
 
-        pg.display.set_mode(self.WIN_SIZE, flags=pg.OPENGL | pg.DOUBLEBUF)
+        self.win = pg.display.set_mode(self.WIN_SIZE, flags=pg.OPENGL | pg.DOUBLEBUF)
 
         self.ctx = mgl.create_context()
+        self.ctx.enable(flags=mgl.DEPTH_TEST| mgl.CULL_FACE)
+
+        self.debug = Debug_Renderer(self)
+
         self.clock = pg.time.Clock()
         self.time = 0
 
@@ -32,6 +37,7 @@ class GraphicsEngine:
     def render(self):
         self.ctx.clear(color=(0.529, 0.808, 0.922))
 
+        self.debug.render()
         self.scene.render()
 
         pg.display.flip()
