@@ -26,7 +26,7 @@ def WindowLoop():
         GAME_WIN.fill((0,0,0))
 
         debug.Tick_Debug()
-        level.Render(DELTATIME)
+        level.RenderLevel(DELTATIME)
         pygame.display.flip()
 
         input.ProcessInput(pygame.key.get_pressed(), DELTATIME)
