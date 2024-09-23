@@ -11,6 +11,7 @@ from debug import Debug_Renderer
 class GraphicsEngine:
     def __init__(self, win_size=(1600, 900)):
         pg.init()
+        pg.font.init()
         self.WIN_SIZE = win_size
 
         pg.display.gl_set_attribute(pg.GL_CONTEXT_MAJOR_VERSION, 3)
@@ -18,6 +19,7 @@ class GraphicsEngine:
         pg.display.gl_set_attribute(pg.GL_CONTEXT_PROFILE_MASK, pg.GL_CONTEXT_PROFILE_CORE)
 
         self.win = pg.display.set_mode(self.WIN_SIZE, flags=pg.OPENGL | pg.DOUBLEBUF)
+        self.font = pg.font.SysFont('Arial', 18)
         pg.event.set_grab(True)
         pg.mouse.set_visible(False)
 
