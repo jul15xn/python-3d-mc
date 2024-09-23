@@ -3,6 +3,7 @@ import moderngl as mgl
 import sys
 from model import *
 from camera import Camera
+from light import Light
 from debug import Debug_Renderer
 
 class GraphicsEngine:
@@ -26,6 +27,8 @@ class GraphicsEngine:
         self.clock = pg.time.Clock()
         self.time = 0
         self.delta_time = 0
+
+        self.light = Light()
 
         self.camera = Camera(self)
         self.scene = Cube(self)
