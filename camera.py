@@ -46,6 +46,7 @@ class Camera:
         self.up = glm.normalize(glm.cross(self.right, self.forward))
 
     def move(self):
+        global SPEED
         velocity = SPEED * self.app.delta_time
         keys = pg.key.get_pressed()
         if keys[pg.K_w]:
@@ -60,6 +61,10 @@ class Camera:
             self.position -= self.up * velocity
         if keys[pg.K_e]:
             self.position += self.up * velocity
+        if keys[pg.K_LSHIFT]:
+            SPEED = 0.05
+        else:
+            SPEED = 0.01
 
     def get_view_matrix(self):
         return glm.lookAt(self.position, self.position + self.forward, self.up)
