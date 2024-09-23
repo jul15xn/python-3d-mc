@@ -36,36 +36,55 @@ class CubeVBO(BaseVBO):
     def get_data(vertices, indices):
         data = [vertices[ind] for triangle in indices for ind in triangle]
         return np.array(data, dtype='f4')
-    
+
+    def remove_duplicate_faces(self, indices):
+        position_to_face = {}
+        filtered_indices = []
+
+        for face in indices:
+            # Create a tuple of vertex indices for the face
+            positions = tuple(sorted(face))  # Sort to ensure order doesn't matter
+            if positions not in position_to_face:
+                position_to_face[positions] = face  # Keep the face
+                filtered_indices.append(face)  # Add to the list of unique faces
+
+        return filtered_indices
+
     def get_vertex_data(self):
-        vertices = [(-1, -1, 1), (1, -1, 1), (1, 1, 1), (-1, 1, 1),
-                    (-1, 1, -1), (-1, -1, -1), (1, -1, -1), (1, 1, -1)]
+        vertices = [
+            (-1, -1, 1), (1, -1, 1), (1, 1, 1), (-1, 1, 1),
+            (-1, 1, -1), (-1, -1, -1), (1, -1, -1), (1, 1, -1)
+        ]
         
-        indices = [(0, 2, 3), (0, 1, 2),
-                   (1, 7, 2), (1, 6, 7),
-                   (6, 5, 4), (4, 7, 6),
-                   (3, 4, 5), (3, 5, 0),
-                   (3, 7, 4), (3, 2, 7),
-                   (0, 6, 1), (0, 5, 6)]
+        # Original list of indices (faces)
+        indices = [
+            (0, 2, 3), (0, 1, 2),
+            (1, 7, 2), (1, 6, 7),
+            (6, 5, 4), (4, 7, 6),
+            (3, 4, 5), (3, 5, 0),
+            (3, 7, 4), (3, 2, 7),
+            (0, 6, 1), (0, 5, 6)
+        ]
+
+        # Remove duplicate faces
+        indices = self.remove_duplicate_faces(indices)
 
         vertex_data = self.get_data(vertices, indices)
 
         tex_coord = [(0, 0), (1, 0), (1, 1), (0, 1)]
-        tex_coord_indices = [(0, 2, 3), (0, 1, 2),
-                             (0, 2, 3), (0, 1, 2),
-                             (0, 1, 2), (2, 3, 0),
-                             (2, 3, 0), (2, 0, 1),
-                             (0, 2, 3), (0, 1, 2),
-                             (3, 1, 2), (3, 0, 1)]
+        tex_coord_indices = [
+            (0, 2, 3), (0, 1, 2),
+            (0, 2, 3), (0, 1, 2),
+            (0, 1, 2), (2, 3, 0),
+            (2, 3, 0), (2, 0, 1),
+            (0, 2, 3), (0, 1, 2),
+            (3, 1, 2), (3, 0, 1)
+        ]
         
         tex_coord_data = self.get_data(tex_coord, tex_coord_indices)
         
-        normals = [( 0, 0, 1) * 6,
-                   ( 1, 0, 0) * 6,
-                   ( 0, 0,-1) * 6,
-                   (-1, 0, 0) * 6,
-                   ( 0, 1, 0) * 6,
-                   ( 0,-1, 0) * 6]
+        normals = [(0, 0, 1)] * 6 + [(1, 0, 0)] * 6 + [(0, 0, -1)] * 6 + \
+                  [(-1, 0, 0)] * 6 + [(0, 1, 0)] * 6 + [(0, -1, 0)] * 6
         normals = np.array(normals, dtype='f4').reshape(36, 3)
         
         vertex_data = np.hstack([normals, vertex_data])

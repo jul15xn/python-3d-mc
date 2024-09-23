@@ -49,6 +49,8 @@ class Camera:
         global SPEED
         velocity = SPEED * self.app.delta_time
         keys = pg.key.get_pressed()
+        if keys[pg.K_PERIOD]:
+            self.app.scene.clear_scene()
         if keys[pg.K_w]:
             self.position += self.forward * velocity
         if keys[pg.K_s]:
