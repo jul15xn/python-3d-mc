@@ -5,11 +5,12 @@ from model import *
 from camera import Camera
 from light import Light
 from mesh import Mesh
-from scene import Scene     
+from scene import Scene
+from noise import Noise
 from debug import Debug_Renderer
 
 class GraphicsEngine:
-    def __init__(self, win_size=(1600, 900)):
+    def __init__(self, win_size=(1000, 600)):
         pg.init()
         pg.font.init()
         self.WIN_SIZE = win_size
@@ -33,6 +34,7 @@ class GraphicsEngine:
         self.delta_time = 0
 
         self.light = Light()
+        self.noise = Noise(69)
 
         self.camera = Camera(self)
         self.mesh = Mesh(self)

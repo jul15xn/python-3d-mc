@@ -17,6 +17,11 @@ class Texture:
         texture = self.ctx.texture(size=texture.get_size(), components=3,
                                    data=pg.image.tostring(texture, 'RGB'))
         texture.filter = (mgl.NEAREST, mgl.NEAREST)
+        
+        # mipmaps
+        # texture.filter = (mgl.LINEAR_MIPMAP_LINEAR, mgl.LINEAR)
+        # texture.build_mipmaps()
+        # texture.anisotrophy = 32.0
         return texture
     
     def destroy(self):
