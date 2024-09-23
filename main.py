@@ -5,6 +5,7 @@ from model import *
 from camera import Camera
 from light import Light
 from mesh import Mesh
+from scene import Scene     
 from debug import Debug_Renderer
 
 class GraphicsEngine:
@@ -33,7 +34,7 @@ class GraphicsEngine:
 
         self.camera = Camera(self)
         self.mesh = Mesh(self)
-        self.scene = Cube(self)
+        self.scene = Scene(self)
 
     def check_events(self):
         for event in pg.event.get():
