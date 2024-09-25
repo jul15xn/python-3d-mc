@@ -14,8 +14,7 @@ FPS_LIMIT = 60
 WIN_RES = glm.vec2(1300, 700)
 
 # world generation
-SEED_RANGE = 2147483646
-SEED = randrange(-SEED_RANGE, SEED_RANGE)
+SEED = 0
 
 # ray casting
 MAX_RAY_DIST = 6
