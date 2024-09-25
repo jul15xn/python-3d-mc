@@ -1,6 +1,7 @@
 from settings import *
 from world_objects.chunk import Chunk
 
+
 class World:
     def __init__(self, app):
         self.app = app
@@ -8,6 +9,9 @@ class World:
         self.voxels = np.empty([WORLD_VOL, CHUNK_VOL], dtype='uint8')
         self.build_chunks()
         self.build_chunk_mesh()
+
+    def update(self):
+        pass
 
     def build_chunks(self):
         for x in range(WORLD_W):
@@ -28,9 +32,38 @@ class World:
         for chunk in self.chunks:
             chunk.build_mesh()
 
-    def update(self):
-        pass
-
     def render(self):
         for chunk in self.chunks:
             chunk.render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,6 +7,7 @@ from scene import Scene
 from player import Player
 from textures import Textures
 
+
 class VoxelEngine:
     def __init__(self):
         pg.init()
@@ -44,7 +45,7 @@ class VoxelEngine:
 
         self.delta_time = self.clock.tick()
         self.time = pg.time.get_ticks() * 0.001
-        pg.display.set_caption(f'FPS: {self.clock.get_fps() :.0f}')
+        pg.display.set_caption(f'{self.clock.get_fps() :.0f}')
 
     def render(self):
         self.ctx.clear(color=BG_COLOR)
@@ -63,6 +64,7 @@ class VoxelEngine:
             self.render()
         pg.quit()
         sys.exit()
+
 
 if __name__ == '__main__':
     app = VoxelEngine()
