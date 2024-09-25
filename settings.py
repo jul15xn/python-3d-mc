@@ -63,6 +63,9 @@ STONE = 4
 SNOW = 5
 LEAVES = 6
 WOOD = 7
+COBBLESTONE = 8
+
+SELECTED_BLOCK = SAND
 
 # terrain levels
 SNOW_LVL = 54

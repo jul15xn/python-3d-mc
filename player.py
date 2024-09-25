@@ -30,7 +30,13 @@ class Player(Camera):
             self.rotate_pitch(delta_y=mouse_dy * MOUSE_SENSITIVITY)
 
     def keyboard_control(self):
+        global SELECTED_BLOCK, PLAYER_SPEED
         key_state = pg.key.get_pressed()
+        if key_state[pg.K_LSHIFT]:
+            PLAYER_SPEED = 0.05
+        else:
+            PLAYER_SPEED = 0.005
+
         vel = PLAYER_SPEED * self.app.delta_time
         if key_state[pg.K_w]:
             self.move_forward(vel)
@@ -44,3 +50,15 @@ class Player(Camera):
             self.move_up(vel)
         if key_state[pg.K_e]:
             self.move_down(vel)
+        if key_state[pg.K_1]:
+            SELECTED_BLOCK = DIRT
+        if key_state[pg.K_2]:
+            SELECTED_BLOCK = GRASS
+        if key_state[pg.K_3]:
+            SELECTED_BLOCK = LEAVES
+        if key_state[pg.K_4]:
+            SELECTED_BLOCK = COBBLESTONE
+        if key_state[pg.K_5]:
+            SELECTED_BLOCK = WOOD
+        if key_state[pg.K_6]:
+            SELECTED_BLOCK = SNOW

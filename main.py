@@ -7,6 +7,7 @@ from scene import Scene
 from player import Player
 from textures import Textures
 from console import Console
+from noise import *
 
 class VoxelEngine:
     def __init__(self, seed):
@@ -34,6 +35,7 @@ class VoxelEngine:
 
     def on_init(self):
         pg.display.set_caption(str(sts.SEED))
+        seed_init()
         self.textures = Textures(self)
         self.player = Player(self)
         self.shader_program = ShaderProgram(self)
@@ -48,7 +50,7 @@ class VoxelEngine:
 
         self.delta_time = self.clock.tick(sts.FPS_LIMIT)
         self.time = pg.time.get_ticks() * 0.001
-        pg.display.set_caption(f'{self.clock.get_fps() :.0f}')
+        pg.display.set_caption(f'{sts.SELECTED_BLOCK} {self.clock.get_fps() :.0f}')
 
     def render(self):
         self.ctx.clear(color=sts.BG_COLOR)

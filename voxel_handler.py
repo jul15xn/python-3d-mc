@@ -16,9 +16,10 @@ class VoxelHandler:
         self.voxel_normal = None
 
         self.interaction_mode = 0  # 0: remove voxel   1: add voxel
-        self.new_voxel_id = DIRT
+        self.new_voxel_id = SELECTED_BLOCK
 
     def add_voxel(self):
+        self.new_voxel_id = SELECTED_BLOCK
         if self.voxel_id:
             # check voxel id along normal
             result = self.get_voxel_id(self.voxel_world_pos + self.voxel_normal)

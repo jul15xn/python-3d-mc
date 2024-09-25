@@ -1,5 +1,6 @@
 import os
 import sys
+from random import *
 
 class Console:
     def __init__(self):
@@ -12,7 +13,10 @@ class Console:
         choise = int(input("> "))
 
         if choise == 1:
-            seed = int(input("What seed: "))
+            try:
+                seed = int(input("What seed: "))
+            except:
+                seed = randrange(-9999999, 9999999)
             os.system('cls')
             print('Starting mc...')
             return {"choise": "singleplayer", "seed": seed}
